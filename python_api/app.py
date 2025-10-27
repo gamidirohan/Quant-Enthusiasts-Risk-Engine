@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_cors import CORS
 import quant_risk_engine
 import traceback
@@ -329,6 +329,10 @@ def health_check():
             'error': str(e)
         }), 500
 
+@app.route("/documentation")
+@app.route("/documentation.html")
+def documentation():
+    return send_from_directory(DASHBOARD_DIR, "documentation.html")
 
 @app.route('/calculate_risk', methods=['POST'])
 def calculate_risk():
